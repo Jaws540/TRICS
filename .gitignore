@@ -1,0 +1,21 @@
+
+# Gradle
+.gradle
+*/build/
+
+# Ignore Gradle GUI config if any
+gradle-app.setting
+
+# Gradle project cache
+.gradletasknamecahce
+
+# IDE Directories
+.idea
+*.iws
+*/out/
+
+# Ignore JAR files
+*.jar
+
+# Don't ignore Gradle wrapper jar
+!gradle-wrapper.jar

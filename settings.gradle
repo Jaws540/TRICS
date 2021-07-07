@@ -1,0 +1,5 @@
+rootProject.name = 'TRICS'
+
+include "core"
+include "character_sheet"
+

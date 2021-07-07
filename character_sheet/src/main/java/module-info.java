@@ -1,0 +1,3 @@
+module CharacterSheet {
+    requires Core;
+}
