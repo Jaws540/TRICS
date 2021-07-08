@@ -1,7 +1,7 @@
 package trics.core.base;
 
-import trics.core.exceptions.InvalidIDException;
 import org.jetbrains.annotations.NotNull;
+import trics.core.exceptions.InvalidIDException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,14 @@ public abstract class Unique {
      */
     private static final List<String> ID_REGISTRY = new ArrayList<>();
 
-    public static final String validIDRegex = "";
-    private static final Pattern validIDPattern = Pattern.compile(validIDRegex);
+    /**
+     * A regular expression meant to match the equivalent of "^[a-zA-Z0-9]*$" in
+     * any language.
+     * <p>
+     * This expression may be too explicit in what categories of characters to omit.
+     */
+    public static final String validIDRegex = "^[\\p{L}\\p{N}&&[^\\p{Z}\\p{P}\\p{C}\\p{S}]]*$";
+    private static final Pattern validIDPattern = Pattern.compile(validIDRegex, Pattern.CANON_EQ);
 
     /**
      * A Unique objects ID.
@@ -40,7 +46,7 @@ public abstract class Unique {
             this.ID = ID;
 
             // Register the ID
-            if(!ID_REGISTRY.contains(ID))
+            if (!ID_REGISTRY.contains(ID))
                 ID_REGISTRY.add(ID);
         }
 
@@ -62,10 +68,12 @@ public abstract class Unique {
      * and is not null. <code>false</code> otherwise.
      */
     public static boolean validID(@NotNull String ID) {
-        // TODO: Match IDs with a regular expression
+        // Match IDs with the regular expression
+        if (validIDPattern.matcher(ID).matches())
+            // Ensure each ID is unique
+            return !ID_REGISTRY.contains(ID);
 
-        // Ensure each ID is unique
-        return !ID_REGISTRY.contains(ID);
+        return false;
     }
 
     /**

@@ -1,5 +1,7 @@
 package trics.core.lang;
 
+import trics.core.base.Unique;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -30,7 +32,7 @@ public final class Lang {
      * There should be no spaces or other whitespace characters before or after the
      * standard name or colon.
      */
-    private static final Pattern validTranslation = Pattern.compile("^([a-zA-Z]):(.*)$");
+    private static final Pattern validTranslation = Pattern.compile("^(" + Unique.validIDRegex + "):(.*)$");
 
     /**
      * Dictionary of translations mapped to standard names for the Strings.
