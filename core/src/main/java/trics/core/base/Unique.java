@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * A Unique object contains a unique ID.
@@ -18,6 +19,9 @@ public abstract class Unique {
      * All Unique objects IDs are registered here to maintain uniqueness among all IDs.
      */
     private static final List<String> ID_REGISTRY = new ArrayList<>();
+
+    public static final String validIDRegex = "";
+    private static final Pattern validIDPattern = Pattern.compile(validIDRegex);
 
     /**
      * A Unique objects ID.

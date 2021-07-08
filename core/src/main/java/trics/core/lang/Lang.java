@@ -21,7 +21,7 @@ public final class Lang {
     /**
      * TRICS should use the UTF-16 encoding for all strings both in input and output
      */
-    private static final Charset charset = StandardCharsets.UTF_16;
+    public static final Charset charset = StandardCharsets.UTF_16;
 
     /**
      * A valid line in a language file contains the standard name for the String
@@ -40,6 +40,11 @@ public final class Lang {
     private static HashMap<String, String> translations = null;
 
     /**
+     * If no translation text is found, this message will be displayed.
+     */
+    private static final String noTranslation = "Error: No text is defined";
+
+    /**
      * Loads and sets the language for output strings.
      *
      * @param langFileName The file name of the language file.
@@ -50,7 +55,10 @@ public final class Lang {
      */
     public static boolean setLanguage(String langFileName) throws IOException {
         // Get all the lines from the language file
-        List<String> langFileLines = Files.readAllLines(Paths.get(".", "core/lang", langFileName), Lang.charset);
+        List<String> langFileLines = Files.readAllLines(
+                Paths.get(".", "lang", langFileName),
+                Lang.charset
+        );
 
         // This will replace translations after all lines have been loaded
         HashMap<String, String> tempTranslations = new HashMap<>();
@@ -69,7 +77,7 @@ public final class Lang {
         }
 
         if (tempTranslations.size() != 0) {
-            // Verify that there are translations that were verified
+            // Verify there are valid translations in the map
             translations = tempTranslations;
 
             return true;
@@ -90,7 +98,7 @@ public final class Lang {
         if (Lang.translations != null)
             return translations.get(text);
 
-        return null;
+        return noTranslation;
     }
 
 }

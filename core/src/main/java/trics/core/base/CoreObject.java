@@ -57,7 +57,8 @@ public class CoreObject extends Taggable {
      * @param fields      A list of Fields in this CoreObject.
      * @throws InvalidIDException This will be thrown if the given ID is invalid.
      */
-    public CoreObject(String ID, String displayName, String description, List<String> tags, @NotNull List<Field<?>> fields) throws InvalidIDException {
+    public CoreObject(String ID, String displayName, String description, List<String> tags,
+                      @NotNull List<Field<?>> fields) throws InvalidIDException {
         super(ID, displayName, description, tags);
 
         // Add all the given fields to this CoreObject
